@@ -9,6 +9,7 @@ export 'package:cached_network_image/cached_network_image.dart';
 export 'dart:convert';
 export 'package:flutter/services.dart';
 export 'package:notes_app/core/router/routes.dart';
+export 'package:package_info_plus/package_info_plus.dart';
 
 
 
