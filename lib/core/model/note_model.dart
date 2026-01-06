@@ -7,6 +7,7 @@ class NoteModel {
   final DateTime createdAt;
   final DateTime updatedAt;
   final String userId;
+  final bool isDelete;
 
   NoteModel({
     required this.id,
@@ -15,6 +16,7 @@ class NoteModel {
     required this.createdAt,
     required this.updatedAt,
     required this.userId,
+    this.isDelete=false
   });
 
   factory NoteModel.fromJson(Map<String, dynamic> json, String docId) {
@@ -25,6 +27,7 @@ class NoteModel {
       createdAt: (json['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
       updatedAt: (json['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
       userId: json['userId'] ?? '',
+      isDelete: json['isDelete']??false
     );
   }
 
@@ -35,6 +38,7 @@ class NoteModel {
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       'userId': userId,
+      'isDelete': isDelete,
     };
   }
 
@@ -45,6 +49,7 @@ class NoteModel {
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
+    bool? isDelete,
   }) {
     return NoteModel(
       id: id ?? this.id,
@@ -53,6 +58,7 @@ class NoteModel {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       userId: userId ?? this.userId,
+      isDelete: isDelete ?? this.isDelete,
     );
   }
 }

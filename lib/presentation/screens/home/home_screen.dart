@@ -19,12 +19,12 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             homeAppbar(),
-            searchView(),
+            searchView(controller),
 
             Obx(() {
               if (controller.isLoading.value) {
                 return shimmerList();
-              } else if (controller.notes.isEmpty) {
+              } else if (controller.filteredNotes.isEmpty) {
                 return emptyNotes();
               } else {
                 return Expanded(
@@ -32,10 +32,32 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     child: ListView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      itemCount: controller.notes.length,
+                      itemCount: controller.filteredNotes.length,
                       itemBuilder: (context, index) {
-                        final note = controller.notes[index];
-                        return NoteCard(note: note);
+                        return Dismissible(
+                          key: ValueKey(controller.filteredNotes[index].id),
+                          direction: DismissDirection.endToStart,
+                          confirmDismiss: (direction) async {
+                            return await showDeleteDialog();
+                          },
+                          onDismissed: (direction) {
+                            controller.deleteNote(controller.filteredNotes[index]);
+                          },
+                          background: Container(
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.only(right: 20),
+                            margin: const EdgeInsets.only(bottom: 12),
+                            decoration: BoxDecoration(
+                              color: AppColors.kRed,
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                            child: const Icon(Icons.delete, color: AppColors.kWhite),
+                          ),
+                          child: NoteCard(
+                            note: controller.filteredNotes[index],
+                            controller: controller,
+                          ),
+                        );
                       },
                     ),
                   ),

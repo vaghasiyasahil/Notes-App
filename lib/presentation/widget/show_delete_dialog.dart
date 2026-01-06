@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:notes_app/export.dart';
 
-void showDeleteDialog({required VoidCallback onDelete}) {
-  showDialog(
+Future<bool?> showDeleteDialog() {
+  return showDialog<bool>(
     context: Get.context!,
     barrierDismissible: false,
     barrierColor: AppColors.kDarkSlate.withValues(alpha: 0.4),
@@ -50,7 +50,7 @@ void showDeleteDialog({required VoidCallback onDelete}) {
                 const SizedBox(height: 12),
 
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Text(
                     "Are you sure you want to delete this note? This action cannot be undone.",
                     textAlign: TextAlign.center,
@@ -68,7 +68,7 @@ void showDeleteDialog({required VoidCallback onDelete}) {
                         child: SizedBox(
                           height: 44,
                           child: AppButton(backgroundColor: AppColors.kRedLight,text: "Cancel", textColor: AppColors.kRed,onPressed: () {
-                            Get.back();
+                            Get.back(result: false);
                           },),
                         ),
                       ),
@@ -77,7 +77,7 @@ void showDeleteDialog({required VoidCallback onDelete}) {
                         child: SizedBox(
                           height: 44,
                           child: AppButton(backgroundColor: AppColors.kRed,text: "Delete", textColor: AppColors.kRedLight,onPressed: () {
-                            onDelete();
+                            Get.back(result: true);
                           },),
                         ),
                       ),

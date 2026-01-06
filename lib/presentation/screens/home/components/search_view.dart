@@ -1,9 +1,10 @@
 import 'package:notes_app/export.dart';
 
-Widget searchView(){
+Widget searchView(HomeController controller) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 16),
     child: TextField(
+      onChanged: (value) => controller.onSearch(value),
       cursorColor: AppColors.kPrimary,
       decoration: InputDecoration(
         hintText: 'Search by title...',

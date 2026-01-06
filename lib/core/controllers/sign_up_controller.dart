@@ -1,5 +1,4 @@
 import 'package:notes_app/export.dart';
-import 'package:notes_app/presentation/widget/app_toast.dart';
 
 class SignUpController extends GetxController {
   final email = TextEditingController();

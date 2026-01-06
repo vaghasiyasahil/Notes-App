@@ -2,17 +2,13 @@ import 'package:notes_app/export.dart';
 
 class NoteCard extends StatelessWidget {
   final NoteModel note;
-  const NoteCard({super.key, required this.note});
+  final HomeController controller;
+  const NoteCard({super.key, required this.note, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Get.toNamed(Routes.addAndUpdateNotesScreen, arguments: note),
-      onLongPress: () {
-        showDeleteDialog(onDelete: () {
-
-        },);
-      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),
@@ -51,7 +47,7 @@ class NoteCard extends StatelessWidget {
             const SizedBox(height: 10),
             Align(
               alignment: Alignment.centerRight,
-              child: Text(note.updatedAt.toString(), style: AppStyle.k12NormalGray),
+              child: Text(controller.formatDate(note.updatedAt), style: AppStyle.k12NormalGray),
             ),
           ],
         ),

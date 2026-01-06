@@ -12,19 +12,15 @@ class SplashController extends GetxController {
   }
 
   Future<void> animateLoader() async {
-    loaderValue.value = 0.0;
+    loaderValue.value = 0.30;
     await SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    loaderValue.value += 0.10;
+    loaderValue.value += 0.60;
     WidgetsFlutterBinding.ensureInitialized();
-    loaderValue.value += 0.20;
-    await Firebase.initializeApp();
-    loaderValue.value += 0.40;
-    await Future.delayed(Duration(milliseconds: 500));
     loaderValue.value += 0.80;
-    await Future.delayed(Duration(milliseconds: 500));
+    await Firebase.initializeApp();
     loaderValue.value += 0.100;
     await Future.delayed(Duration(milliseconds: 500));
     Get.offNamed(
