@@ -73,6 +73,7 @@ void showLogoutDialog() {
                       child: SizedBox(
                         height: 44,
                         child: AppButton(backgroundColor: AppColors.kPrimary,text: "Logout", textColor: AppColors.kSecondary,onPressed: () {
+                          FirebaseAuthService.logOut();
                         },),
                       ),
                     ),

@@ -12,7 +12,7 @@ class AddAndUpdateNotesController extends GetxController {
     if (Get.arguments != null && Get.arguments is NoteModel) {
       existingNote = Get.arguments as NoteModel;
       titleController.text = existingNote!.title;
-      contentController.text = existingNote!.description;
+      contentController.text = existingNote!.content;
     }
   }
 

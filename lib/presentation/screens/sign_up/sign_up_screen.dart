@@ -43,6 +43,7 @@ class SignUpScreen extends StatelessWidget {
                     label: "Password",
                     hint: "Enter your password",
                     controller: controller.password,
+                    isPassword: true,
                     obscureText: !controller.isPasswordShow.value,
                     validator: (value) =>
                         Validators.validatePassword(value ?? ""),
@@ -58,6 +59,7 @@ class SignUpScreen extends StatelessWidget {
                     label: "Confirm Password",
                     hint: "Re-enter your password",
                     controller: controller.confirmPassword,
+                    isPassword: true,
                     obscureText: !controller.isConfirmPasswordShow.value,
                     validator: (value) => Validators.validateConfirmPassword(
                       controller.password.text,
@@ -72,11 +74,12 @@ class SignUpScreen extends StatelessWidget {
 
                 SizedBox(
                   width: double.infinity,
-                  child: AppButton(
-                    text: "Create Account",
-                    onPressed: () {
-                      controller.signUp();
-                    },
+                  child: Obx(
+                    () => AppButton(
+                      text: "Create Account",
+                      isLoading: controller.isLoading.value,
+                      onPressed: controller.signUp,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),

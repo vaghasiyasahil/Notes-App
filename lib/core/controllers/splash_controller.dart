@@ -18,16 +18,20 @@ class SplashController extends GetxController {
       DeviceOrientation.portraitDown,
     ]);
     loaderValue.value += 0.10;
-    await Future.delayed(Duration(milliseconds: 500));
+    WidgetsFlutterBinding.ensureInitialized();
     loaderValue.value += 0.20;
-    await Future.delayed(Duration(milliseconds: 500));
+    await Firebase.initializeApp();
     loaderValue.value += 0.40;
     await Future.delayed(Duration(milliseconds: 500));
     loaderValue.value += 0.80;
     await Future.delayed(Duration(milliseconds: 500));
     loaderValue.value += 0.100;
     await Future.delayed(Duration(milliseconds: 500));
-    Get.offNamed(Routes.homeScreen);
+    Get.offNamed(
+      FirebaseAuthService.currentUser() == null
+          ? Routes.loginScreen
+          : Routes.homeScreen,
+    );
   }
 
   Future<void> getAppVersion() async {

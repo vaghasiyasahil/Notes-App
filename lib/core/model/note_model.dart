@@ -1,11 +1,58 @@
+import 'package:notes_app/export.dart';
+
 class NoteModel {
+  final String id;
   final String title;
-  final String description;
-  final String time;
+  final String content;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final String userId;
 
   NoteModel({
+    required this.id,
     required this.title,
-    required this.description,
-    required this.time,
+    required this.content,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.userId,
   });
+
+  factory NoteModel.fromJson(Map<String, dynamic> json, String docId) {
+    return NoteModel(
+      id: docId,
+      title: json['title'] ?? '',
+      content: json['content'] ?? '',
+      createdAt: (json['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      updatedAt: (json['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      userId: json['userId'] ?? '',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'content': content,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
+      'userId': userId,
+    };
+  }
+
+  NoteModel copyWith({
+    String? id,
+    String? title,
+    String? content,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? userId,
+  }) {
+    return NoteModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      content: content ?? this.content,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      userId: userId ?? this.userId,
+    );
+  }
 }

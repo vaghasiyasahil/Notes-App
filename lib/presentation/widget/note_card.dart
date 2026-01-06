@@ -43,7 +43,7 @@ class NoteCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              note.description,
+              note.content,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(color: AppColors.kNeutralGray),
@@ -51,7 +51,7 @@ class NoteCard extends StatelessWidget {
             const SizedBox(height: 10),
             Align(
               alignment: Alignment.centerRight,
-              child: Text(note.time, style: AppStyle.k12NormalGray),
+              child: Text(note.updatedAt.toString(), style: AppStyle.k12NormalGray),
             ),
           ],
         ),

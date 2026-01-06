@@ -8,6 +8,7 @@ class AppButton extends StatelessWidget {
   final double height;
   final double borderRadius;
   final Widget? icon;
+  final bool isLoading;
 
   const AppButton({
     super.key,
@@ -18,6 +19,7 @@ class AppButton extends StatelessWidget {
     this.height = 56,
     this.borderRadius = 12,
     this.icon,
+    this.isLoading = false,
   });
 
   @override
@@ -32,7 +34,13 @@ class AppButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
-        child: icon != null
+        child: isLoading
+            ? SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(color: AppColors.kSecondary),
+              )
+            : icon != null
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

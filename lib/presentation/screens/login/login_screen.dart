@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   AppLogo(),
                   const SizedBox(height: 24),
-        
+
                   Text("Hello Again!", style: AppStyle.k32BoldDarkSlate),
                   const SizedBox(height: 8),
                   Text(
@@ -30,39 +30,46 @@ class LoginScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),
-        
+
                   AppTextField(
                     label: "Email",
-                    hint: "name@example.com",
+                    hint: "Enter your email",
                     controller: controller.email,
                     keyboardType: TextInputType.emailAddress,
-                    validator: (value) =>  Validators.validateEmail(value??""),
+                    validator: (value) => Validators.validateEmail(value ?? ""),
                   ),
-        
+
                   const SizedBox(height: 10),
                   Obx(
                     () => AppTextField(
                       label: "Password",
-                      hint: "Test@1234",
+                      hint: "Enter your password",
                       controller: controller.password,
-                      obscureText: controller.isPasswordShow.value,
+                      obscureText: !controller.isPasswordShow.value,
                       isPassword: true,
                       onSuffixIconClick: () {
                         controller.togglePassword();
                       },
-                      validator: (value) => Validators.validatePassword(value??""),
+                      validator: (value) =>
+                          Validators.validatePassword(value ?? ""),
                     ),
                   ),
-        
+
                   const SizedBox(height: 26),
-        
+
                   SizedBox(
                     width: double.infinity,
                     height: 50,
-                    child: AppButton(text: "Log in", onPressed: controller.login),
+                    child: Obx(
+                      () => AppButton(
+                        text: "Log in",
+                        isLoading: controller.isLoading.value,
+                        onPressed: controller.login,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 24),
-        
+
                   Row(
                     children: [
                       Expanded(
@@ -82,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-        
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -96,7 +103,9 @@ class LoginScreen extends StatelessWidget {
                         },
                         child: Text(
                           "Sign up",
-                          style: AppStyle.k16500Gray.copyWith(color: AppColors.kPrimary),
+                          style: AppStyle.k16500Gray.copyWith(
+                            color: AppColors.kPrimary,
+                          ),
                         ),
                       ),
                     ],
