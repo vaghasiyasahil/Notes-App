@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: AppColors.kSecondary,
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.kPrimary,
-        onPressed: () {},
+        onPressed: () => Get.toNamed(Routes.addAndUpdateNotesScreen),
         child: const Icon(Icons.add, size: 28, color: AppColors.kSecondary),
       ),
       body: SafeArea(
@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             searchView(),
 
             Obx(() {
-              if (!controller.isLoading.value) {
+              if (controller.isLoading.value) {
                 return shimmerList();
               } else if (controller.notes.isEmpty) {
                 return emptyNotes();

@@ -7,6 +7,7 @@ class NoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () => Get.toNamed(Routes.addAndUpdateNotesScreen, arguments: note),
       onLongPress: () {
         showDeleteDialog(onDelete: () {
 

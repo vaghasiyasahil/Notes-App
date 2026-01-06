@@ -37,7 +37,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> getNotes() async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(seconds: 3));
     isLoading.value=false;
   }
 
