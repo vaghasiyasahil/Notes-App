@@ -30,7 +30,6 @@ class SplashController extends GetxController {
       Get.offAllNamed(Routes.noInternetScreen);
       return;
     }
-
     Get.offNamed(
       FirebaseAuthService.currentUser() == null
           ? Routes.loginScreen
