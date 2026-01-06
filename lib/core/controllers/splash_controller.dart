@@ -17,12 +17,20 @@ class SplashController extends GetxController {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    loaderValue.value += 0.60;
+    loaderValue.value += 0.40;
     WidgetsFlutterBinding.ensureInitialized();
-    loaderValue.value += 0.80;
+    loaderValue.value += 0.60;
     await Firebase.initializeApp();
+    loaderValue.value += 0.80;
+    final connectivityService = Get.put(ConnectivityService(), permanent: true);
+    loaderValue.value += 0.90;
+    bool isConnected = await connectivityService.checkCurrentStatus();
     loaderValue.value += 0.100;
-    await Future.delayed(Duration(milliseconds: 500));
+    if (!isConnected) {
+      Get.offAllNamed(Routes.noInternetScreen);
+      return;
+    }
+
     Get.offNamed(
       FirebaseAuthService.currentUser() == null
           ? Routes.loginScreen

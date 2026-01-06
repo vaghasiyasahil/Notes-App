@@ -18,46 +18,54 @@ class NoInternetScreen extends StatelessWidget {
           style: AppStyle.k18600DarkSlate,
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    wifiIcon(),
-
-                    const SizedBox(height: 24),
-
-                    Text(
-                      'No internet connection',
-                      style: AppStyle.k20BoldDarkSlate,
-                      textAlign: TextAlign.center,
-                    ),
-
-                    const SizedBox(height: 8),
-
-                    Text(
-                      'Please check your connection and try again to access your latest notes.',
-                      style: AppStyle.k14NormalGray,
-                      textAlign: TextAlign.center,
-                    ),
-
-                    const SizedBox(height: 32),
-                    SizedBox(
-                      width: double.infinity,
-                      child: AppButton(text: "Retry", onPressed: () {
-                        controller.retryConnection();
-                      },),
-                    ),
-                  ],
+      body: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) {
+          if (didPop) return;
+          appToast(
+            content: "Please connect to the internet to continue.",
+            type: ToastificationType.warning,
+          );
+        },
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      wifiIcon(),
+                      const SizedBox(height: 24),
+                      Text(
+                        'No internet connection',
+                        style: AppStyle.k20BoldDarkSlate,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Please check your connection and try again to access your latest notes.',
+                        style: AppStyle.k14NormalGray,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 32),
+                      SizedBox(
+                        width: double.infinity,
+                        child: AppButton(
+                          text: "Retry",
+                          onPressed: () {
+                            controller.retryConnection();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
