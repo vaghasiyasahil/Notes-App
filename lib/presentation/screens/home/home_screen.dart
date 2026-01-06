@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.kPrimary,
         onPressed: () {},
-        child: const Icon(Icons.add, size: 28,color: AppColors.kSecondary,),
+        child: const Icon(Icons.add, size: 28, color: AppColors.kSecondary),
       ),
       body: SafeArea(
         child: Column(
@@ -21,21 +21,27 @@ class HomeScreen extends StatelessWidget {
             homeAppbar(),
             searchView(),
 
-            if(false)...[
-              emptyNotes()
-            ]else...[
-              const SizedBox(height: 12),
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: controller.notes.length,
-                  itemBuilder: (context, index) {
-                    final note = controller.notes[index];
-                    return NoteCard(note: note);
-                  },
-                ),
-              ),
-            ]
+            Obx(() {
+              if (!controller.isLoading.value) {
+                return shimmerList();
+              } else if (controller.notes.isEmpty) {
+                return emptyNotes();
+              } else {
+                return Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: controller.notes.length,
+                      itemBuilder: (context, index) {
+                        final note = controller.notes[index];
+                        return NoteCard(note: note);
+                      },
+                    ),
+                  ),
+                );
+              }
+            }),
           ],
         ),
       ),

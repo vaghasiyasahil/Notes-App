@@ -4,4 +4,5 @@ class Routes {
   static const signUpScreen = '/signUpScreen';
   static const homeScreen = '/homeScreen';
   static const noInternetScreen = '/noInternetScreen';
+  static const addAndUpdateNotesScreen = '/addAndUpdateNotesScreen';
 }

@@ -7,5 +7,6 @@ class Pages {
     GetPage(name: Routes.signUpScreen, page: () => SignUpScreen()),
     GetPage(name: Routes.homeScreen, page: () => HomeScreen()),
     GetPage(name: Routes.noInternetScreen, page: () => NoInternetScreen()),
+    GetPage(name: Routes.addAndUpdateNotesScreen, page: () => AddAndUpdateNotesScreen()),
   ];
 }

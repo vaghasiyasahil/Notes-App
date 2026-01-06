@@ -5,13 +5,10 @@ export 'notes.dart';
 export 'package:flutter/material.dart';
 export 'package:get/get.dart';
 export 'package:google_fonts/google_fonts.dart';
-export 'package:cached_network_image/cached_network_image.dart';
 export 'dart:convert';
 export 'package:flutter/services.dart';
 export 'package:notes_app/core/router/routes.dart';
 export 'package:package_info_plus/package_info_plus.dart';
-
-
-
+export 'package:shimmer/shimmer.dart';
 
 

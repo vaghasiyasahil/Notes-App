@@ -1,6 +1,7 @@
 import 'package:notes_app/export.dart';
 
 class HomeController extends GetxController {
+  RxBool isLoading = true.obs;
   final notes = <NoteModel>[
     NoteModel(
       title: 'Meeting Notes - Q3 Strategy',
@@ -27,4 +28,17 @@ class HomeController extends GetxController {
       time: 'Sep 15, 2023',
     ),
   ];
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getNotes();
+  }
+
+  Future<void> getNotes() async {
+    await Future.delayed(Duration(seconds: 1));
+    isLoading.value=false;
+  }
+
 }
