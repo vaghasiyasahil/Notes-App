@@ -9,6 +9,7 @@ class LoginController extends GetxController {
 
   Future<void> login() async {
     if (formKey.currentState!.validate() && !isLoading.value) {
+      Get.log("email = $email");
       isLoading.value = true;
       try {
         await FirebaseAuthService.loginWithEmail(

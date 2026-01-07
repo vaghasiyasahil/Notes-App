@@ -3,7 +3,6 @@ import 'package:notes_app/export.dart';
 class AddAndUpdateNotesController extends GetxController {
   final titleController = TextEditingController();
   final contentController = TextEditingController();
-  RxBool isLoading = false.obs;
   NoteModel? existingNote;
 
   @override
@@ -23,7 +22,7 @@ class AddAndUpdateNotesController extends GetxController {
       Get.back();
       return;
     }
-    isLoading.value = true;
+    Loader.showLoader();
     try {
       final now = DateTime.now();
       final userId = FirebaseAuthService.auth.currentUser?.uid ?? '';
@@ -50,7 +49,7 @@ class AddAndUpdateNotesController extends GetxController {
     } catch (e) {
       Get.log("Error : $e");
     } finally {
-      isLoading.value = false;
+      Loader.closeLoader();
     }
   }
 

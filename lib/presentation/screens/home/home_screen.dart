@@ -37,25 +37,16 @@ class HomeScreen extends StatelessWidget {
                         return Dismissible(
                           key: ValueKey(controller.filteredNotes[index].id),
                           direction: DismissDirection.endToStart,
-                          confirmDismiss: (direction) async {
-                            return await showDeleteDialog();
-                          },
-                          onDismissed: (direction) {
-                            controller.deleteNote(controller.filteredNotes[index]);
-                          },
-                          background: Container(
-                            alignment: Alignment.centerRight,
-                            padding: const EdgeInsets.only(right: 20),
-                            margin: const EdgeInsets.only(bottom: 12),
-                            decoration: BoxDecoration(
-                              color: AppColors.kRed,
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            child: const Icon(Icons.delete, color: AppColors.kWhite),
+                          confirmDismiss: (direction) async => await showDeleteDialog(),
+                          onDismissed: (direction) => controller.deleteNote(
+                            controller.filteredNotes[index],
                           ),
+                          background: dismissibleBackground(),
                           child: NoteCard(
                             note: controller.filteredNotes[index],
                             controller: controller,
+                            onLongPress: () =>
+                                controller.onDeleteLongPress(index: index),
                           ),
                         );
                       },

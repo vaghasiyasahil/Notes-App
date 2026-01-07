@@ -83,6 +83,13 @@ class HomeController extends GetxController {
     }
   }
 
+  Future<void> onDeleteLongPress({required int index}) async {
+    final result = await showDeleteDialog();
+    if(result==true){
+      deleteNote(filteredNotes[index]);
+    }
+  }
+
   @override
   void onClose() {
     notesSubscription?.cancel();
