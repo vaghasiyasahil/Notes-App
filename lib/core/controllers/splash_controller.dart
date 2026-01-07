@@ -19,8 +19,10 @@ class SplashController extends GetxController {
     ]);
     loaderValue.value += 0.40;
     WidgetsFlutterBinding.ensureInitialized();
+    await Future.delayed(Duration(seconds: 1));
     loaderValue.value += 0.60;
     await Firebase.initializeApp();
+    await Future.delayed(Duration(seconds: 2));
     loaderValue.value += 0.80;
     final connectivityService = Get.put(ConnectivityService(), permanent: true);
     loaderValue.value += 0.90;
